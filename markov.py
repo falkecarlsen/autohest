@@ -1,14 +1,18 @@
+import subprocess
+
 import markovify
 import os
 import glob
 import json
+
+from markovify.text import ParamError
 
 CUTOFF = 2000
 NGRAM_SIZE = 3
 dir_path = 'hest'
 
 global model
-
+global start
 
 def read_files_from_directory(directory_path):
     # Initialize an empty list to hold the text content
@@ -49,3 +53,19 @@ except FileNotFoundError as e:
         print(f"Could not write built model: {e}")
 
 print("Ready for hest-quest: ")
+while True:
+    output_str = ""
+    input_str = input("starting words > ")
+    if not input_str == 'r':
+        start = input_str
+    if len(start) == 0:
+        output_str = model.make_sentence()
+    else:
+        try:
+            output_str = model.make_sentence_with_start(start, )
+        except Exception as e:
+            print("\t Could not start sentence with given input")
+
+    print(output_str)
+    subprocess.Popen(f'say "{output_str if output_str else 'prut'}"', shell=True,
+                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

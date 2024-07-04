@@ -1,6 +1,8 @@
 # autohest
 Markov chain generator fed [heste-nettet](https://www.heste-nettet.dk/).
 
+First unpack the corpus in `hest.zip.part-*` into a directory `./hest/`.
+
 Meant for interactive use:
 ```sh
 $ source venv/bin/activate.fish
