@@ -3,13 +3,11 @@ Markov chain generator fed [heste-nettet](https://www.heste-nettet.dk/).
 
 First unpack the corpus in `hest.zip.part-*` into a directory `./hest/`.
 
-Meant for interactive use:
+Meant for interactive use and supports TTS command to have autohest read out loud the result:
 ```sh
 $ source venv/bin/activate.fish
-$ python
-exec(open('./markov.py').read())
-model.make_sentence()
-model_make_sentence_with_start("Min hest er")
+$ ./autohest.py
+starting words > Min kæreste er 
 ```
 
 ## License for `hest.zip`

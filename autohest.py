@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import subprocess
 
 import markovify
@@ -7,8 +8,14 @@ import json
 
 from markovify.text import ParamError
 
-CUTOFF = 2000
+# number of threads to train on
+CUTOFF = 1000
 NGRAM_SIZE = 3
+
+# defaults for TTS
+TTS_CMD = ''
+#TTS_CMD = 'say'
+TTS_NO_RESULT_OUTPUT = 'øhm, det ved jeg ikke?'
 dir_path = 'hest'
 
 global model
@@ -67,5 +74,6 @@ while True:
             print("\t Could not start sentence with given input")
 
     print(output_str)
-    subprocess.Popen(f'say "{output_str if output_str else 'prut'}"', shell=True,
+    if TTS_CMD:
+        subprocess.Popen(f'{TTS_CMD} "{output_str if output_str else TTS_NO_RESULT_OUTPUT}"', shell=True,
                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
